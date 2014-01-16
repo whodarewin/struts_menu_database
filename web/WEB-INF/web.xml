@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+  PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
+
+<web-app>
+     <!-- Define the basename for a resource bundle for I18N -->
+     <!-- Use this to set a default ResourceBundle for EL tag - or set in JSP
+          using <fmt:setBundle baseName="TrackerRes"/>       -->
+
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>TrackerRes</param-value>
+    </context-param>
+    
+    <!-- Action Servlet Configuration -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+	<init-param>
+		<param-name>config</param-name>
+		<param-value>/WEB-INF/struts-config.xml</param-value>
+	</init-param>
+	<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>source</servlet-name>
+		<description>display source of jsp pages</description>
+		<servlet-class>net.sf.navigator.example.DisplaySourceServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>source</servlet-name>
+		<url-pattern>*.src</url-pattern>
+	</servlet-mapping>
+	
+  <!-- Action Servlet Mapping -->
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <!-- The Welcome File List -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- Restrict all users from accessing /secure.jsp -->
+  <security-constraint>
+      <web-resource-collection>
+          <web-resource-name>Struts Menu</web-resource-name>
+          <description>Require users to authenticate</description>          
+          <url-pattern>/secure.jsp</url-pattern>                    
+          <http-method>POST</http-method>
+          <http-method>GET</http-method>
+      </web-resource-collection>
+      <auth-constraint>
+          <role-name>tomcat</role-name>
+          <role-name>role1</role-name>
+      </auth-constraint>
+  </security-constraint>
+  <!-- Login Configuration --> 
+  
+  <login-config>
+      <auth-method>BASIC</auth-method>
+      <realm-name>Roles Demonstration</realm-name>
+  </login-config>
+  
+  <security-role>
+      <description>The Default Role</description>
+      <role-name>tomcat</role-name>
+  </security-role>
+  <security-role>
+      <description>A Second Role (to prove a comma-delimited list works)</description>
+      <role-name>role1</role-name>
+  </security-role>
+</web-app>

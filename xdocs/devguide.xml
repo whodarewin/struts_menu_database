@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+
+    <properties>
+        <title>Developer Guide</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+        <section name="Setting up the development environment">
+            <p>Getting the build process running for Struts Menu is remarkably easy, thanks to Maven. Here's what you need to do:
+                <ul>
+                    <li>
+                        Check out module "navigator" from the CVS repository (anonymous).
+                        <a href="http://sourceforge.net/cvs/?group_id=48726">Further details</a> are provided on SourceForge.
+                    </li>
+                    <li>
+                        <a href="http://maven.apache.org/start/download.html">Download</a> and install Maven.
+                    </li>
+                    <li>
+                        Set up the necessary environment variables (JAVA_HOME, MAVEN_HOME), put the maven/bin directory in your PATH...
+                    </li>
+                    <li>
+                        From the navigator root directory (where project.xml is), run "maven war" -
+                        this will download all sorts of dependecies and finally build struts-menu.war in the "target" subdirectory.
+                    </li>
+                    <li>
+                        Copy/deploy navigator.war into your servlet container (eg. Tomcat). For your convenience, you can use
+                        "maven deploy" if you have Tomcat installed and the CATALINA_HOME environment variable defined.
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section name="Setting up Eclipse project">
+            <p>
+                <ul>
+                    <li>Start Eclipse</li>
+                    <li>Under "Window"-&gt;"Open perspective"-&gt;"CVS Repository exploring"</li>
+                    <li>In "CVS repositories" view:
+                        <li>Right click</li>
+                        <li>Select "New" -&gt; "Repository location"</li>
+                        <li>set host to : "struts-menu.cvs.sourceforge.net"</li>
+                        <li>set repository path: "/cvsroot/struts-menu"</li>
+                        <li>set user to: "anonymous"</li>
+                        <li>Click finish</li>
+                    </li>
+                    <li>Navigate to HEAD -> navigator</li>
+                    <li>Right click, and select "Check out as Project"</li>
+                    <li>Drink a coke during the checkout (optional:-)</li>
+                    <li>From a command prompt enter:
+                        <p>
+                            <code>
+                                "C:>cd ECLIPSE_PATH\workspace\navigator"
+                            </code>
+                        </p>
+                        <p>
+                            <code>
+                                "...\eclipse\workspace\navigator>maven eclipse:add-maven-repo"
+                            </code>
+                        </p>
+                        This will download all the dependencies, and set up maven_repo for eclipse
+                        <p>
+                            <code>
+                                "maven eclipse"
+                            </code>
+                        </p>
+                        This will create a .classpath file for your project.  Refresh the project and you should
+                        be good to go.  You can also create an IDEA project using "maven idea".
+                    </li>
+                </ul>
+                <ul>
+                    Congratulation, you've got the fresh code of struts-menu as an Eclipse project !
+                </ul>
+            </p>
+        </section>
+
+    </body>
+</document>

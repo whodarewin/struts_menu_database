@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+
+    <properties>
+        <title>User Guide</title>
+        <author email="mraible@users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+        <section name="Migrating from 1.x">
+            <p>To upgrade from Struts Menu 1.x to Struts Menu 2.x, you need to change a few
+                things:
+                <ul>
+                    <li>Change the URI in your taglib declaration - we removed the "1.2" part.
+                        <source><![CDATA[<%@ taglib uri="http://struts-menu.sf.net/tag" prefix="menu" %>]]></source>
+                    </li>
+                    <li>Change the &lt;plug-in&gt; to use the new package name "net.sf.navigator."
+                        <source><![CDATA[<plug-in className="net.sf.navigator.menu.MenuPlugIn">]]></source>
+                    </li>
+                    <li>Change your menu-config.xml to use the new package name "net.sf.navigator."
+<source><![CDATA[<Displayer name="Simple"
+  type="net.sf.navigator.displayer.SimpleMenuDisplayer"/>]]></source>
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section name="Quick Start">
+            <p>
+                <ul>
+                    <li>Download the latest
+                        <a href="http://sourceforge.net/project/showfiles.php?group_id=48726">release of struts-menu</a>.
+                    </li>
+                    <li>Unzip it to a local directory.</li>
+                    <li>Download and install
+                        <a href="http://jakarta.apache.org/tomcat">Tomcat</a> or another Java Servlet container.
+                    </li>
+                    <li>Put struts-menu.war in Tomcat's webapps folder and start the server.</li>
+                    <li>Go to
+                        <a href="http://localhost:8080/navigator">http://localhost:8080/struts-menu</a>
+                    </li>
+                </ul>
+            </p>
+        </section>
+        <section name="Integrating Struts Menu into your application">
+            <p>
+                Struts Menu can be easily integrated into your Struts application.
+                Here are the steps you need to take to integrate this tag library.
+            </p>
+            <p>
+                Copy struts-menu.jar into your WEB-INF/lib directory. Add the plug-in settings to your struts-config.xml file.
+<source><![CDATA[<plug-in className="net.sf.navigator.menu.MenuPlugIn">
+  <set-property property="menuConfig" value="/WEB-INF/menu-config.xml"/> <!-- Default settings -->
+</plug-in>]]></source>
+            </p>
+            <p style="font-style: italic">For Struts Menu 2.1+, you can put Jakarta's
+                <a href="http://jakarta.apache.org/taglibs/doc/standard-1.0-doc/intro.html">
+                Standard Tag Library JAR</a> in your WEB-INF/lib directory if you want to resolve EL expressions in menu-config.xml.
+            </p>
+            <ol>
+                <li>You will need to declare your menu's attributes in a WEB-INF/menu-config.xml file.  Here's a short snippet of what
+                    this might look like:
+<source><![CDATA[<Menu name="contactMenu" title="Contact" location="?Contact">
+  <Item name="email" title="E-Mail" location="?EMail"/>
+  <Item name="phone" title="Phone" location="?Phone"/>
+</Menu>]]></source>
+                    
+                    <br />
+                    For a more thorough example, look in the sample app's web/WEB-INF directory
+                    for the menu-config file and trim it down to fit your needs.  For a 
+                    complete list of possible attributes, see the
+                    <a href="http://struts-menu.sourceforge.net/apidocs/net/sf/navigator/menu/MenuBase.html">MenuBase class's javadocs</a>.
+                </li>
+                <li>Add a taglib declaration to the top of your JSP:
+                    <source><![CDATA[<%@ taglib uri="http://struts-menu.sf.net/tag" prefix="menu" %>]]></source>
+                </li>
+                <li>Add taglib code to render your menu in your JSP:
+<source><![CDATA[<menu:useMenuDisplayer name="TabbedMenu"
+  bundle="org.apache.struts.action.MESSAGE">
+  <menu:displayMenu name="Home"/>
+  <menu:displayMenu name="About"/>
+</menu:useMenuDisplayer>]]></source>
+                </li>
+            </ol>
+
+            <p>The
+                <strong>name="TabbedMenu"</strong> is defined in menu-config.xml towards the top:
+            </p>
+
+<source><![CDATA[<Displayer name="TabbedMenu"
+  type="net.sf.navigator.displayer.TabbedMenuDisplayer"/>]]></source>
+
+            <p>
+                To use a customizeable Velocity template to render your menu, you will need to integrate
+                Velocity into your webapp.  To do this, perform the following steps:
+            </p>
+            <ol>
+                <li>Make sure your menu-config.xml file has a "Velocity" displayer defined:
+<source><![CDATA[<Displayer name="Velocity" 
+    type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>]]></source>
+                </li>
+                <li>Add Velocity JARs to your WEB-INF/lib directory.  Download: <a href="http://www.ibiblio.org/maven/velocity/jars/velocity-1.4.jar">velocity-1.4.jar</a> and <a href="http://www.ibiblio.org/maven/velocity-tools/jars/velocity-tools-view-1.0.jar">velocity-tools-view-1.0.jar</a>.</li>
+                <li>Change the displayer value to be "Velocity" in your JSP and the "config" attribute
+                    should point to a file (i.e. config="/templates/tabs.html") or config="tabs.html" if 
+                    tabs.html is in your WEB-INF/classes directory.
+                </li>
+            </ol>
+            <p>
+                There are many examples of using the Velocity displayer in the <a href="http://demo.raibledesigns.com/struts-menu/index.jsp">sample application</a>
+                as well as <a href="http://appfuse.org">AppFuse</a>.  The example application will show you the CSS, JavaScript and image files you will
+                need for each menu.  Below are links to the Velocity templates currently available in Struts Menu.
+            </p>
+            <ul>
+                <li>CoolMenus:
+                    <a href="http://demo.raibledesigns.com/struts-menu/velocity-coolmenu4.jsp">Demo</a>,
+                    <a href="templates/coolmenus.html">Template</a>
+                </li>
+                <li>CSS Menu:
+                    <a href="http://demo.raibledesigns.com/struts-menu/cssHorizontal.jsp">Demo</a>,
+                    <a href="templates/cssMenu.html">Template</a>
+                </li>
+                <li>NiceTabs:
+                    <a href="http://demo.raibledesigns.com/struts-menu/velocity-nicetabs.jsp?Home">Demo</a>,
+                    <a href="templates/nicetabs.html">Template</a>
+                </li>
+                <li>Tabs:
+                    <a href="http://demo.raibledesigns.com/struts-menu/velocity-tabs.jsp?Home">Demo</a>,
+                    <a href="templates/tabs.html">Template</a>
+                </li>
+                <li>XTree:
+                    <a href="http://demo.raibledesigns.com/struts-menu/velocity-xtree.jsp">Demo</a>,
+                    <a href="templates/xtree.html">Template</a>
+                </li>
+            </ul>
+            <p>All the relevant files you might need are available on this site:</p>
+            <ul>
+                <li><a href="menu-images/">Images</a></li>
+                <li><a href="styles/">Stylesheets</a></li>
+                <li><a href="scripts/">Scripts</a></li>
+                <li><a href="templates/">Templates</a></li>
+            </ul>
+            <p>For more information on hiding/displaying menu items based on roles, see
+                <a href="faq.html">the FAQs</a>.
+            </p>
+        </section>
+        <section name="Using Struts Menu outside of Struts">
+            <p>In version 2.2+, the Menu Repository can now be loaded
+                using a MenuContextListener:</p>
+
+<source><![CDATA[<!--
+   - Loads the menu-config.xml for struts-menu at startup,
+   - by default from "/WEB-INF/menu-config.xml".
+   - To override this, add a context-param named "menuConfigLocation"
+   - web.xml file.
+   -->
+<listener>
+    <listener-class>net.sf.navigator.menu.MenuContextListener</listener-class>
+</listener>]]></source>
+
+            <p>Or if you're using <a href="http://www.springframework.org">Spring</a>, it's even easier.
+               Just add the following to your applicationContext.xml file:</p>
+
+<source><![CDATA[<bean id="menu" class="net.sf.navigator.menu.MenuLoader">
+  <property name="menuConfig" value="/WEB-INF/menu-config.xml"/> <-- default and optional -->
+</bean>]]></source>
+
+                <p>Thanks to <a href="mailto:dluputan at iquestint dot com">Dan Luputan</a> for contributed code
+                for the MenuLoader class.
+            </p>
+        </section>
+        <section name="Building from Source">
+            <p>
+                To build this project from source, perform the following steps:
+            </p>
+            <ol>
+                <li>Download and install
+                    <a href="http://maven.apache.org">Maven</a>.
+                </li>
+                <li>Create a MAVEN_HOME environment variable that points to where
+                    you installed Maven. Then add $MAVEN_HOME/bin to your PATH.</li>
+                <li>Navigate to the directory you've expanded the source to and
+                    execute "maven jar" to create target/struts-menu.jar.</li>
+            </ol>
+
+            <p>
+                To deploy the struts-menu example application, do the following:</p>
+            <ol>
+                <li>Download and install
+                    <a href="http://jakarta.apache.org/tomcat">Tomcat</a>.
+                </li>
+                <li>Create a CATALINA_HOME environment variable that points to
+                    where you installed Tomcat.</li>
+                <li>Execute "maven deploy" to deploy the app to Tomcat.</li>
+                <li>Open http://localhost:8080/struts-menu in your favorite browser</li>
+            </ol>
+            <p>If you'd like to use Eclipse to build this project, see the Developer Guide
+                <a href="devguide.html">Developer Guide</a>.
+            </p>
+        </section>
+    </body>
+</document>

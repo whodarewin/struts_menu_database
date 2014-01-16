@@ -1,0 +1,7 @@
+*.project
+*.mymetadata
+*.class
+*.bat
+*.myeclipse
+*.settings
+classes

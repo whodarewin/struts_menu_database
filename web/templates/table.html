@@ -1,0 +1,22 @@
+## The displayMenu macro (at the bottom of this template) is defined in
+## struts-menu.jar!/net/sf/displayer/globalMacros.vm. It has a callback to the #menuItem macro
+## you see below. You can override this macro by creating a menuMacros.vm template
+## at the root of your classpath
+
+#macro( menuItem $menu $level )
+  <tr><td>
+  #foreach ($i in [0..$level])
+    &nbsp;&nbsp;
+  #end
+  #if ($menu.url) 
+    <a href="$menu.url" title="$displayer.getMessage($menu.title)">
+        $displayer.getMessage($menu.title)</a>
+  #else 
+    $displayer.getMessage($menu.title)
+  #end
+  </td></tr>
+#end
+
+<table>
+#displayMenu($menu 0)
+</table>

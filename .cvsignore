@@ -1,0 +1,9 @@
+maven.log
+velocity.log
+target
+*.log
+.project
+.classpath
+bin
+db
+struts-menu.i*

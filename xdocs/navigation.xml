@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Struts Menu" href="http://struts-menu.sourceforge.net/">
+    <title>Struts Menu Tag Library</title>
+    <body>
+        <links>
+            <item name="Home" href="http://struts-menu.sourceforge.net/"/>
+            <item name="Demo" href="http://demo.raibledesigns.com/struts-menu/index.jsp"/>
+            <item name="SourceForge Project Page" href="http://sourceforge.net/projects/struts-menu/"/>
+            <item name="Browse CVS" href="http://struts-menu.cvs.sourceforge.net/struts-menu/navigator/"/>
+            <item name="Download" href="http://sourceforge.net/project/showfiles.php?group_id=48726"/>
+            <item name="Create an Issue" href="http://issues.appfuse.org/browse/SM"/>
+        </links>
+        <menu name="Reference">
+          <item name="Overview" href="index.html" />
+            <item name="User Guide" href="/userguide.html" />
+            <item name="FAQ" href="/faq.html" />
+            <item name="Developer Guide" href="/devguide.html" />
+            <item name="Project Status" href="/status.html" />
+            <item name="Security Model" href="/security.html" />
+        </menu>
+       <!-- footer will be placed above the (c) -->
+        <footer>
+            <a href="http://sourceforge.net/projects/struts-menu">
+              <img src="http://sourceforge.net/sflogo.php?group_id=48726"
+                style="border: 0" alt="SourceForge Logo"/></a>
+        </footer>
+
+    </body>
+</project>

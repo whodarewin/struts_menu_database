@@ -1,0 +1,19 @@
+## The displayMenu macro (at the bottom of this template) is defined in
+## struts-menu.jar!/net/sf/displayer/globalMacros.vm. It has a callback to the #menuItem macro
+## you see below. You can override this macro by creating a menuMacros.vm template
+## at the root of your classpath
+
+#macro( menuItem $menu $level )
+  ## set title
+  #set ($title = $displayer.getMessage($menu.title))
+  #set ($node = $menu.name)
+  #if ($level == 0)
+    var $node = new WebFXTree('$title'#if($menu.url),'$!menu.url'#end);
+  #else
+    var $node = new WebFXTreeItem('$title'#if($menu.url),'$!menu.url'#end);
+    ${menu.parent.name}.add($node);
+  #end
+#end
+
+#displayMenu($menu 0)
+document.write($menu.name);

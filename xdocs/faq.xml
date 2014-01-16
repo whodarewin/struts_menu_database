@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+
+    <properties>
+        <title>Developer Guide</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+
+        <section name="Frequently Asked Questions">
+            <p><strong>Q:</strong> I get the following error when I try to access a JSP with a menu: 
+<source><![CDATA[org.apache.jasper.JasperException: Could not obtain the menu repository]]></source>
+            </p>
+            <p><strong>A:</strong> Check your struts-config.xml to make sure the plug-in settings are correct. 
+                They should be similar to the following:
+<source><![CDATA[<plug-in className="net.sf.navigator.menu.MenuPlugIn">
+  <set-property property="menuConfig"
+    value="/WEB-INF/menu-config.xml"/>
+</plug-in>
+<!-- The menuConfig property is an optional attribute.  It is set to
+    /WEB-INF/menu-config.xml by default. -->]]></source></p>
+            <p><strong>Q:</strong> How do I show/hide menus/items based on roles?</p>
+            <p><strong>A:</strong> Add permissions="rolesAdapter" to your &lt;menu:useMenuDisplayer&gt; tag. 
+                Then in your menu-config.xml, put a comma-delimited list of roles that are allowed to view this menu
+                or item. For more information, see the <a href="security.html">security model page</a>.
+            </p>
+            <p><strong>Q:</strong> Can I use Struts Menu outside of a Struts Application?</p>
+            <p><strong>A:</strong> In version 2.2+, the Menu Repository can now be loaded
+                using a MenuContextListener:</p>
+
+<source><![CDATA[<!--
+   - Loads the menu-config.xml for struts-menu at startup,
+   - by default from "/WEB-INF/menu-config.xml".
+   - To override this, add a context-param named "menuConfigLocation"
+   - web.xml file.
+   -->
+<listener>
+    <listener-class>net.sf.navigator.menu.MenuContextListener</listener-class>
+</listener>]]></source>
+
+            <p>NOTE: You'll need version 2.3+ if you want to remove struts.jar from your project.
+               You can also configure the repository to be loaded by 
+               <a href="http://www.springframework.org">Spring</a>.
+               Just add the following to your context file:
+
+<source><![CDATA[<bean id="menu" class="net.sf.navigator.menu.MenuLoader">
+  <property name="menuConfig">
+    <value>/WEB-INF/menu-config.xml</value>
+  </property>
+</bean>
+<!-- The menuConfig property is an optional attribute.  It is set to
+    /WEB-INF/menu-config.xml by default. -->]]></source></p>
+
+                <p>Thanks to <a href="mailto:dluputan at iquestint dot com">Dan Luputan</a> for contributed code
+                for the MenuLoader class.</p>
+                <p>I also added support for regular ol' ResourceBundles and, if you're using the
+                EL tag - JSTL's ResourceBundle. Here's how it all works:</p>
+
+                <p style="margin-left: 30px; font-style: italic">The EL tag defaults to JSTL's
+                ResourceBundle if no "bundle" attribute is specified, and to Struts' MessageResources
+                if that's not found. The regular tag defaults to Struts' MessageResources if no
+                bundle is specified. All bad bundle attributes result in a log.error() rather
+                than a JspException.</p>
+                
+            <p><strong>Q:</strong> How do I create a menu dynamically from a database?</p>
+            
+            <p><strong>A:</strong> The example app has a <a href="http://demo.raibledesigns.com/struts-menu/dynamicMenu.jsp">howto
+                for dynamic menus</a>.
+            </p>
+    
+        </section>
+
+    </body>
+</document>

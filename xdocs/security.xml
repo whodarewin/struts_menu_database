@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Security Model</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+
+        <section name="Background: PermissionsAdapter">
+            <p>
+                Checking the Javadoc, you'll find the <i>PermissionsAdapter</i> Interface. 
+                This interface has one method: "isAllowed(MenuComponent)" that is called for each menu and 
+                menu item when the menu is being drawn. If it returns true, the item is drawn, if it 
+                returns false, the item is not drawn. (Some menu implementations may draw, but disable 
+                disallowed menu items)</p>
+                
+             <p>
+                 Struts Menu comes with a single concrete implementation of the PermissionsAdapter, 
+                 called RolesPermissionsAdapter. This adapter maps the user's security roles as defined in the 
+                 application/appserver configuration against a list of permitted roles defined for each menu/menu 
+                 item in menu-config.xml</p>
+             <p>
+                 If you would like to use a custom PermissionsAdapter (i.e. to hide certain links on a given
+                 page), you will need to create a class that <em>implements</em> PermissionsAdapter. Here is an example
+                 one from the sample app:
+
+<source><![CDATA[package net.sf.navigator.example;
+
+import java.util.ArrayList;
+
+import net.sf.navigator.menu.MenuComponent;
+import net.sf.navigator.menu.PermissionsAdapter;
+
+public class SimplePermissionsAdapter implements PermissionsAdapter {
+    private ArrayList menuNames;
+
+    /**
+     * Creates a new instance of SimplePermissionAdapter
+     */
+    public SimplePermissionsAdapter(String[] theMenuNames) {
+        menuNames = new ArrayList();
+
+        if (theMenuNames != null) {
+            for (int i = 0; i < theMenuNames.length; i++) {
+                menuNames.add(theMenuNames[i]);
+            }
+        }
+    }
+
+    /**
+     * If the menu is allowed, this should return true.
+     *
+     * @return whether or not the menu is allowed.
+     */
+    public boolean isAllowed(MenuComponent menu) {
+        return !menuNames.contains(menu.getName());
+    }
+}]]></source>
+
+                This will basically disable any menus (by name) that you use to instantiate this class with.  Here
+                is an example from net.sf.navigator.example.SetPermissionsAction.java in the sample app:
+
+<source><![CDATA[String[] menus = request.getParameterValues("menus");
+
+PermissionsAdapter permissions = new SimplePermissionsAdapter(menus);
+request.getSession().setAttribute("exampleAdapter", permissions);}]]></source>
+
+                One way to use PermissionsAdapters is to set the allowed Menus in a Filter - for instance, keying off
+                the requested URL.  At the <a href="#filterExample">bottom of this page</a> is an example of some
+                code you might put in a filter.  This example uses regular expressions in the "description" attribute
+                to decide if the menu should be shown for the current URL.
+                </p>
+        </section>
+
+        <section name="Step 0: Define your roles">
+            <p>
+                This is part of your general J2EE/JAAS/etc security configuration. 
+                Each user or group will be allocated roles. Those roles are mapped to 
+                role definitions in the application's configuration. It's a <em>very good idea</em> 
+                to sit down at a whiteboard with your use cases and map out what the various roles 
+                are and what they're allowed to do <em>before</em> implementing anything.</p>
+
+        </section>
+
+        <section name="Step 1: Define a PermissionsAdapter for the menu">
+            <p>
+                The JSP tag you use to display the menu, &lt;menu:useMenuDisplayer/> has an optional property: 
+                "permissions". If this property is present, it's used as the key with which to look up 
+                an instance of <i>PermissionsAdapter</i> in the application/request/session/page scope. 
+                It will then apply that adapter to the menu.</p>
+                
+                <p>There is, however, a "magic" value for this property, "rolesAdapter". 
+                This magic value tells the menu displayer that instead of looking for an adapter in scope, 
+                it should instead create a new instance of RolesPermissionsAdapter and use that instead.</p>
+                
+                <p>So, step 1 is to go through all your invocations of &lt;menu:useMenuDisplayer/&gt; and add 
+                <code>permissions="rolesAdapter"</code> to the tag.</p>
+
+
+        </section>
+        
+        <section name="Step 2: Map roles to menu items in menu-config.xml">
+                <p>The &lt;Menu/&gt; and &lt;Item&gt; tags in your menu configuration file 
+                (which is variable, but I shall refer to as menu-config.xml) have an optional 
+                "roles" attribute. This attribute, when used in conjunction with the 
+                RolesPermissionsAdapter, is a comma-separated list of <em>all</em> the roles 
+                that will be permitted to use a particular menu or menu-item.</p> 
+                
+                <p>RolesPermissionsAdapter works by splitting the list, and calling 
+                <code>request.isUserInRole()</code> for each one. If any of them come back 
+                true, the menu or menu item is displayed.</p>
+                
+                <p>So, for the following menu item definitions:</p>
+                
+<source><![CDATA[<Menu name="PrefsMenu" title="Preferences" roles="User">
+  <Item name="UserPrefs" title="User Preferences" page="prefs.do"/>
+  <Item name="ModPrefs" title="Moderator Preferences"
+    page="modPrefs.do" roles="Moderator System"/>
+  <Item name="AdminPrefs" title="Site Preferences"
+    page="sitePrefs.do" roles="System"/>
+</Menu>]]></source>
+                <p>The menu is visible to anyone in the User role, who then get access to User Preferences 
+                automatically. Anyone in the System or Moderator roles can access the moderator preferences, 
+                but the site preferences are limited only to System-level users.</p>
+                <p>Of course, this doesn't prevent people accessing the page in ways other than using the 
+                menu, but it's polite not to present people with options that you know they can't take 
+                advantage of.</p>
+                <p>Thanks to <a href="http://fishbowl.pastiche.org/2003/10/29/strutsmenu_permissions">Charles Miller</a>
+                   for this documentation.</p>
+        </section>
+        
+        <section name="Code Samples"><a name="filterExample"></a>
+            <p>Filter Method example - just call request = request.setupBreadcrumbs(request) before calling chain.doFilter(request, response);</p>
+
+<source><![CDATA[public HttpServletRequest setupBreadcrumbs(HttpServletRequest request) {
+    MenuRepository repository =
+        (MenuRepository) request.getSession().getServletContext()
+                                .getAttribute(MenuRepository.MENU_REPOSITORY_KEY);
+
+    MenuComponent menu = repository.getMenu("JobPostingMenu");
+    List menusToEnable = new ArrayList();
+    boolean enableMenu = false;
+
+    List items = menu.getComponents();
+    List menus = new ArrayList();
+
+    String currentURL = request.getRequestURI();
+
+    if (log.isDebugEnabled()) {
+        log.debug("currentURL: " + currentURL);
+    }
+
+    // if the currentURL matches any in the JobPostingMenu, 
+    // perform logic to show/hide menus
+    if (items != null) {
+        for (Iterator it = items.iterator(); it.hasNext();) {
+            MenuComponent kid = (MenuComponent) it.next();
+
+            // using descriptions to match URLs since the actions
+            // and forwards are determined in the taglib at runtime
+            String pattern = kid.getDescription().trim();
+            menus.add(kid.getName());
+
+            if (log.isDebugEnabled()) {
+                log.debug("comparing itemURL: " + pattern);
+            }
+
+            boolean matchFound =
+                Pattern.compile(pattern).matcher(currentURL).find();
+
+            if (matchFound) {
+                enableMenu = true;
+
+                break;
+            }
+        }
+    }
+
+    if (log.isDebugEnabled()) {
+        log.debug(((enableMenu) ? "enabling" : "disabling") +
+                  " JobPostingMenu");
+    }
+
+    if (enableMenu) {
+        String positionId =
+            (request.getParameter("positionId") == null)
+            ? request.getParameter("id") : request.getParameter("positionId");
+        request.getSession().setAttribute("positionId", positionId);
+        menusToEnable.add(menu.getName());
+
+        // loop through, get the first one that matches, and then enable
+        // all the ones up to that point
+        for (int i = 0; i < menus.size(); i++) {
+            menusToEnable.add((String) menus.get(i));
+        }
+    }
+
+    if (log.isDebugEnabled()) {
+        log.debug("allowed menus: " + menusToEnable);
+    }
+
+    PermissionsAdapter permissions = new BreadcrumbsMenuAdapter(menusToEnable);
+    request.setAttribute("breadcrumbsAdapter", permissions);
+
+    return request;
+}]]></source>
+        </section>
+    </body>
+</document>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+
+    <properties>
+        <title>Overview</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+        <section name="Overview">
+            <p>
+                The latest release is version 2.4.3. All users are encouraged to upgrade to at least 2.4.2 as some major
+                performance and security issues were solved in this release.  Most of them only affect folks using
+                the VelocityDisplayer. The major change for VelocityDisplayer users is that globalMacros.vm
+                has now moved into the JAR itself. You no longer need to put it in your WEB-INF/classes directory.
+                For permissions checking in a velocity template, you'll now need to use $displayer.isAllowed($menu) as
+                explained in <a href="http://issues.appfuse.org/browse/SM-58#action_10997">
+                JIRA issue SM-58</a>.
+            </p>
+            <p>
+                <a href="http://sourceforge.net/project/showfiles.php?group_id=48726">Download the latest Struts Menu Release</a>
+            </p>
+            <p>
+                As of version 2.3, you can use Struts Menu outside of a Struts application. 
+                See the <a href="faq.html">FAQ</a> for more information.  The latest release
+                has been successfully implemented in <a href="http://appfuse.org">
+                AppFuse's</a> Struts, Struts 2, Spring MVC, Tapestry and JSF versions.
+            </p>
+            <p>
+                You can <a href="http://sourceforge.net/project/showfiles.php?group_id=48726">download</a> the struts-menu example
+                app, and <a href="userguide.html">install</a> it for yourself or
+                <a href="http://demo.raibledesigns.com/struts-menu">view it on the demo server</a>. 
+            </p>
+            <p>
+                Struts Menu has been tested and certified with Java 5 and Java EE 5.
+            </p>
+        </section>
+        
+        <a name="status"></a>
+        <section name="Project Status">
+            <p>
+                Check out the <a href="status.html">project status</a> page for more information.
+            </p>
+        </section>
+        
+        <section name="Feedback">
+            <p>Your <a href="mailto:struts-menu-user@lists.sourceforge.net">feedback</a> is welcome.</p>
+        </section>
+
+    </body>
+</document>

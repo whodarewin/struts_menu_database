@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Status</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+        <section name="Current status">
+            <p><strong>June 1, 2007</strong> - Struts Menu 2.4.3 Released.<br /><br />
+               This is a bug fix release.
+               See the <a href="changes-report.html#2_4_3">changelog</a> for a complete
+               list of changes.
+            </p>
+        </section>
+
+        <section name="What&apos;s New">
+            <subsection name="Version 2.4.3 Released - June 1, 2007">
+                <p>
+                    Bug fix release.
+                    See the <a href="changes-report.html#2_4_3">changelog</a> for a complete
+                    list of changes.
+                </p>
+            </subsection>
+            <subsection name="Version 2.4.2 Released - October 18, 2006">
+                <p>
+                    Bug fixes, particular for Velocity+Security and CSS Menus.
+                    See the <a href="changes-report.html#2_4_2">changelog</a> for a complete
+                    list of changes.
+                </p>
+            </subsection>
+            <subsection name="Version 2.4.1 Released - July 09, 2006">
+                <p>
+                    Bug fixes, especially for Velocity and CSS-based menus.
+                    See the <a href="changes-report.html#2_4_1">changelog</a> for a complete
+                    list of changes.
+                </p>
+            </subsection>
+            <subsection name="Version 2.4 Released - May 10, 2006">
+                <p>
+                    Fixed a number of bugs and made menus more CSS-friendly. Improved performance
+                    drastically, particularly for the VelocityMenuDisplayer.
+                    See the <a href="changes-report.html#2_4">changelog</a> for a complete
+                    list of changes.
+                </p>
+            </subsection>
+            <subsection name="Version 2.3 Released - September 27, 2004">
+                <p>
+                    Fixed many bugs reported in the various trackers and completely
+                    de-coupled tag from Struts. If you're not using Struts, struts.jar is no longer
+                    required in the classpath. See the <a href="changes-report.html#2_3">changelog</a> 
+                    for a complete list of changes.
+                </p>
+            </subsection>
+            <subsection name="Version 2.2 Released - March 30, 2004">
+                <p>
+                    Removed JSTL from core tag for JSP 1.1 compatibility.  Removed
+                    Struts dependency and added examples for configuration in Spring.
+                    Enhanced EL tag and added dynamic menu (from database) example.
+                    See the <a href="changes-report.html#2_2">changelog</a> for a complete
+                    list of changes.
+                </p>
+            </subsection>
+            <subsection name="Version 2.1 Released - December 20, 2003">
+                <p> JSTL Support, Highlighting menu selected in Expandable List, fixed
+                    bugs in Forward/Action lookup.
+                    See the
+                    <a href="changes-report.html#2_1">changelog</a>, for all the bug fixes
+                    in 2.1.
+                </p>
+            </subsection>
+            <subsection name="Version 2.0 Released - November 30, 2003">
+                <p>
+                    Release of Struts Menu 2.0 - Refactored to use
+                    <a href="http://velocity.apache.org">Velocity</a>
+                    for defining HTML used in menus.  If it's possible to
+                    create a menu with HTML/CSS/JavaScript, it
+                    <em>should</em>
+                    be possible to create with Struts Menu.
+                    As you can see in the
+                    <a href="changes-report.html#2_0">changelog</a>, a lot of enhancements have
+                    been made in this release.
+                </p>
+            </subsection>
+        </section>
+
+    </body>
+</document>

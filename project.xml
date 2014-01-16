@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+<project>
+    <pomVersion>3</pomVersion>
+    <id>struts-menu</id>
+    <name>Struts Menu</name>
+    <groupId>struts-menu</groupId>
+    <currentVersion>2.4.3</currentVersion>
+
+    <organization>
+        <name>SourceForge</name>
+        <url>http://struts-menu.sourceforge.net/</url>
+    </organization>
+
+    <inceptionYear>2003</inceptionYear>
+    <package>net.sf.navigator</package>
+    <logo>/images/sm-logo.png</logo>
+    
+    <description>
+        This application allows creation of many different
+        menu systems from an XML file or dynamically from a database.
+    </description>
+    <shortDescription>
+        Struts Menu is a navigation system for web applications.
+    </shortDescription>
+
+    <url>http://struts-menu.sourceforge.net</url>
+    <issueTrackingUrl>http://issues.appfuse.org/browse/SM</issueTrackingUrl>
+    <siteAddress>shell.sourceforge.net</siteAddress>
+    <siteDirectory>/home/groups/s/st/struts-menu/htdocs</siteDirectory>
+    <distributionDirectory>/home/groups/s/st/struts-menu/htdocs/builds/</distributionDirectory>
+
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@struts-menu.cvs.sourceforge.net:/cvsroot/struts-menu:navigator</connection>
+        <developerConnection>scm:cvs:ext:${maven.username}@struts-menu.cvs.sourceforge.net:/cvsroot/struts-menu:navigator</developerConnection>
+        <url>http://struts-menu.cvs.sourceforge.net/struts-menu/navigator/</url>
+    </repository>
+
+    <mailingLists>
+        <mailingList>
+            <name>User Mailing List</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/${pom.groupId}-user</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/${pom.groupId}-user</unsubscribe>
+            <archive>http://www.mail-archive.com/struts-menu-user@lists.sf.net/</archive>
+        </mailingList>
+        <mailingList>
+            <name>Developer Mailing List</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/${pom.groupId}-devel</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/${pom.groupId}-devel</unsubscribe>
+            <archive>http://www.mail-archive.com/struts-menu-devel@lists.sf.net/</archive>
+        </mailingList>
+        <mailingList>
+            <name>CVS Commits Mailing List</name>
+            <subscribe>http://lists.sourceforge.net/lists/listinfo/${pom.groupId}-cvs</subscribe>
+            <unsubscribe>http://lists.sourceforge.net/lists/listinfo/${pom.groupId}-cvs</unsubscribe>
+            <archive>http://sourceforge.net/mailarchive/forum.php?forum=${pom.groupId}-cvs</archive>
+        </mailingList>
+    </mailingLists>
+
+    <developers>
+        <developer>
+            <name>Scott Sayles</name>
+            <id>ssayles</id>
+            <email>ssayles AT users.sourceforge.net</email>
+        </developer>
+        <developer>
+            <name>Matt Raible</name>
+            <id>mraible</id>
+            <email>mraible AT users.sourceforge.net</email>
+            <organization>Raible Designs, Inc.</organization>
+            <roles>
+              <role>Project Administrator</role>
+              <role>Java Developer</role>
+            </roles>
+            <timezone>-7</timezone>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Charles Miller</name>
+            <email>cmiller AT pastiche.org</email>
+            <organization />
+            <timezone />
+        </contributor>
+        <contributor>
+            <name>Dan Luputan</name>
+            <email>dluputan AT iquestint.com</email>
+            <timezone />
+        </contributor>
+    </contributors>
+  
+    <dependencies>
+        <dependency>
+            <id>commons-beanutils</id>
+            <version>1.6.1</version>
+            <url>http://jakarta.apache.org/commons/beanutils.html</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>commons-collections</id>
+            <version>3.0</version>
+            <url>http://jakarta.apache.org/commons/collections.html</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>commons-digester</id>
+            <version>1.7</version>
+            <url>http://jakarta.apache.org/commons/beanutils.html</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>commons-lang</id>
+            <version>2.1</version>
+            <url>http//jakarta.apache.org/commons/lang.html</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>commons-logging</id>
+            <version>1.0.4</version>
+            <url>http://jakarta.apache.org/commons/logging.html</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>hsqldb</id>
+            <version>1.7.1</version>
+            <url>http://hsqldb.sourceforge.net/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>log4j</id>
+            <version>1.2.8</version>
+            <url>http://jakarta.apache.org/log4j</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>servletapi</id>
+            <version>2.3</version>
+            <!-- Compile time only -->
+        </dependency>
+
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.0.6</version>
+            <url>http://jakarta.apache.org/taglibs/doc/standard-1.0-doc/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+    
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.0.6</version>
+            <url>http://jakarta.apache.org/taglibs/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>struts</id>
+            <version>1.2.9</version>
+            <url>http://struts.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <!-- For initializing menu with Spring -->
+        <dependency>
+            <groupId>springframework</groupId>
+            <artifactId>spring</artifactId>
+            <version>1.2.6</version>
+            <url>http://www.springframework.org</url>
+        </dependency>
+
+        <dependency>
+            <id>velocity</id>
+            <version>1.4</version>
+            <url>http://jakarta.apache.org/velocity</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <dependency>
+            <id>velocity-tools</id>
+            <version>view-1.0</version>
+            <url>http://jakarta.apache.org/velocity/tools</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+
+        <!-- dependencies for unit testing -->
+        <dependency>
+            <id>junit</id>
+            <version>3.8.1</version>
+            <type>test</type>
+            <url>http://junit.org</url>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <nagEmailAddress>mraible@users.sourceforge.net</nagEmailAddress>
+        <sourceDirectory>src/java</sourceDirectory>
+
+        <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+
+        <integrationUnitTestSourceDirectory/>
+        <aspectSourceDirectory/>
+
+        <unitTest>
+            <includes>
+                <include>**/*Test.java</include>
+            </includes>
+        </unitTest>
+
+        <resources>
+            <resource>
+                <directory>${basedir}/src/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.vm</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/conf</directory>
+                <includes>
+                    <include>**/*.tld</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+  <!-- List of activated reports -->
+  <reports>
+    <report>maven-license-plugin</report>
+    <report>maven-changes-plugin</report>
+    <report>maven-javadoc-plugin</report>
+    <report>maven-jdepend-plugin</report>
+    <report>maven-checkstyle-plugin</report>
+    <!--report>maven-pmd-plugin</report-->
+    <!--report>maven-junit-report-plugin</report-->
+    <report>maven-jxr-plugin</report>
+    <report>maven-tasklist-plugin</report>
+    <report>maven-simian-plugin</report>
+    <report>maven-changelog-plugin</report>
+    <report>maven-file-activity-plugin</report>
+    <report>maven-developer-activity-plugin</report>
+    <!--report>maven-statcvs-plugin</report-->
+    <!--report>maven-linkcheck-plugin</report-->
+    <!--<report>maven-sitevalidator-plugin</report>-->
+  </reports>
+</project>

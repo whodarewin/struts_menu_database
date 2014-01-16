@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<!--
+  "type" attribute can be: add, remove, update or fix.
+-->
+<document>
+    <properties>
+        <title>Changes</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+        <release version="2.4.3" date="June 1, 2007" description="Bug fix release">
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-64">SM-64</a> URLs not properly encoded when cookies are off and using a non-Struts web framework.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-68">SM-68</a> PermissionAdapter not firing for lowest menu level.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-77">SM-77</a> Closing &lt;/ul&gt; tag does not match in CSSListMenuDisplayer when Menu item doesn't have children allowed to view.  
+            </action>   
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-79">SM-79</a> Menus with duplicate names not showing up properly.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-81">SM-81</a> When target is used with Velocity CSS Menu there is no space between target and style attribute.
+            </action>   
+        </release>
+        <release version="2.4.2" date="October 18, 2006" description="Bug fixes, particular for Velocity+Security and CSS Menus">
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-25">SM-25</a> Changed VelocityDisplayer to use a VelocityEngine instance instead of the singleton Velocity.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-26">SM-26</a> Fixed tabs.css so submenus render in correct position when content is above menu.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-48">SM-48</a> Modified CSSListMenuDisplayer to correctly handle menu tags without location, action or page.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-50">SM-50</a> Fixed UseMenuDisplayerTag so id attribute doesn't throw NPE on Tomcat 4.x and WebLogic 8.1.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-57">SM-57</a> Fixed CSSListMenuDisplayer so it doesn't invalid XHTML when a submenu contains items for which the user has no permissions to see.
+            </action>
+            <action type="fix" dev="mraible">
+                <a href="http://issues.appfuse.org/browse/SM-58">SM-58</a> Fixed VelocityDisplayer so removing menu items for a particular role effects doesn't affect all users.
+            </action>
+            <action type="fix">
+                For a full list of issues fixed in 2.4, please see the
+                <a href="http://issues.appfuse.org/secure/ReleaseNote.jspa?projectId=10002&amp;styleName=Html&amp;version=10091">detailed release notes</a>.
+            </action>
+        </release>
+        <release version="2.4.1" date="July 09, 2006" description="Bug fixes, especially for Velocity-based menus">
+            <action type="fix" dev="mraible">
+                Fixed VelocityMenuDisplayer so it properly updates parent menus when setting permissions on menus.
+            </action>
+            <action type="fix" dev="mraible">
+                Fixed CSSMenuDisplayer to allow menu items without URL-related attributes.
+            </action>
+            <action type="fix" dev="mraible">
+                Fixed CSSMenuDisplayer (and Velocity templates that produce CSS-based menus) to include style="width: 000px" when "width" attribute exists.
+            </action>
+            <action type="fix" dev="mraible">
+                Fixed issue where MenuRepository required Velocity in classpath, even when not using VelocityDisplayer.
+            </action>
+        </release>
+        <release version="2.4" date="May 10, 2006" description="Bug fixes and performance improvements">
+            <action type="add" dev="mraible" due-to="Tim Morrow">
+                Added "module" attribute for using with Struts' modules feature.
+            </action>
+            <action type="fix" dev="mraible">
+                Added URL Rewriting when cookies are off.
+            </action>
+            <action type="fix" dev="mraible">
+                Added replacement for CoolMenus4 that's based purely on CSS (and some JavaScript for IE).
+                See <a href="http://issues.appfuse.org/browse/SM-9">SM-9</a> for more information.
+            </action>
+            <action type="fix" dev="mraible">
+                Removed hard-coding of &lt;div&gt; id's for ListMenuDisplayer. Added "id" attribute to 
+                useMenuDisplayer tag that allows you to give menus unique ids.  Modified CoolMenus4 and List/Tabbed/CSS
+                Displayers to handle this.
+            </action>
+            <action type="fix" dev="mraible">
+                Major performance improvements to VelocityMenuDisplayer and EL Tags. 
+            </action>
+            <action type="fix" dev="mraible">
+                Turned on Velocity caching by default and fixed displayer so you can override individual properties in velocity.properties.
+            </action>
+            <action type="fix" dev="mraible">
+                Changed FastHashMap in MenuRepository to LinkedMap so displayers
+                and menus retain the order they were added in. Used LinkedMap instead
+                of LinkedHashMap to maintain JDK 1.3 compatibility.
+            </action>
+            <action type="fix" dev="mraible" due-to="Ryan Tyer">
+                Fixed DHTML DropDown Menu to work with submenus. 
+            </action>
+            <action type="fix" dev="mraible">
+                Fixed bug in CoolMenuDisplayer4 so menu names with "." in them would be replaced with "_" to 
+                prevent JavaScript errors.
+            </action>
+            <action type="fix" dev="mraible" due-to="Paul Gilowey">
+                Fixed bug in CoolMenuDisplayer4 - onclick argument was not in correct location.
+            </action>
+            <action type="fix">
+                For a full list of issues fixed in 2.4, please see the 
+                <a href="http://issues.appfuse.org/secure/ReleaseNote.jspa?projectId=10002&amp;styleName=Html&amp;version=10051">detailed release notes</a>.
+            </action>
+        </release>
+        <release version="2.3" date="September 27, 2004" description="Complete de-coupling from Struts and various bug fixes.">
+            <action type="fix" dev="mraible">
+                Changed various classes to remove dependencies on struts.jar for
+                non-Struts webapps.
+            </action>
+            <action type="fix" dev="mraible" due-to="Andriy Ruzhevych">
+                Fixed <a href="http://www.mail-archive.com/struts-menu-user@lists.sf.net/msg00116.html">
+                issue with DropDownMenuDisplayer and JavaScript</a>.
+            </action>
+            <action type="fix" dev="mraible" due-to="Colm OFlaherty" issue="802709">
+                Added <a href="http://www.mail-archive.com/struts-menu-user@lists.sf.net/msg00249.html">
+                missing keys to DisplayerStrings.properties</a>.  I don't know what these are supposed
+                to be, but adding empty values removes "null" from the rendered menu.
+            </action>
+            <action type="fix" dev="mraible" issue="740959" due-to="balkanboy">
+                Added check to see if menu/item is allowed in all displayers.
+            </action>
+            <action type="fix" dev="mraible" issue="857215">
+                Added "target" and "onclick" attributes to tabbed and list menus.
+            </action>
+            <action type="fix" dev="mraible" issue="872381" due-to="edollin">
+                Corrected script tag for CoolMenuDisplayer.
+            </action>
+            <action type="fix" dev="mraible" issue="894585" due-to="edollin">
+                Removed .classpath and .project files.  To generate, use "maven eclipse".
+            </action>
+            <action type="fix" dev="mraible" issue="906585" due-to="free2create">
+                Removed unused jsMenu class variable in ListMenuDisplayer.
+            </action>
+            <action type="fix" dev="mraible" issue="906782" due-to="free2create">
+                Cleaned up HTML in DisplayerStrings.properties to remove HTML errors.
+            </action>
+            <action type="fix" dev="mraible" issue="965985" due-to="sshah">
+                Fixed bug in MenuRepository where initDigester() method treats 
+                levels 6 and 7 the same as level 5.
+            </action>
+            <action type="fix" dev="mraible" issue="980007" due-to="Paul Hu">
+                Removed toString() and hashCode() methods from MenuComponent since
+                they were causing a StackOverflowError.
+            </action>
+            <action type="add" dev="mraible" issue="702619" due-to="edollin">
+                Added cookies to remember expanded menus in DropDownDisplayer.
+            </action>
+            <action type="add" dev="mraible" issue="994316" due-to="sparecreative">
+                Added ability to add links to base items in Expandable List Menu.  
+                The plus icon will expand the menu, the link will take you to the URL (if one exists).
+            </action>   
+            <action type="fix" dev="mraible" issue="999248" due-to="v912485">
+                Fixed .classpath file by using "maven eclipse".
+            </action>    
+            <action type="add" dev="mraible" issue="1023969" due-to="free2create">
+                Added 'align' property to MenuBase for use with CoolMenuDisplayer4.
+            </action>  
+            <action type="fix" dev="mraible" issue="1011508" due-to="festerwim">   
+                Fixed padding issue with tabs and spacing b/w IE and Mozilla.
+            </action>    
+            <action type="update" dev="mraible">   
+                Moved demo site from http://raibledesigns.com/struts-menu to
+                <a href="http://demo.raibledesigns.com/struts-menu">
+                http://demo.raibledesigns.com/struts-menu</a>.
+            </action>  
+        </release>
+        <release version="2.2" date="March 30, 2004" description="Dynamic Menus from database, usable outside of Struts and various EL enhancements">
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added support for plain ol' ResourceBundles and JSTL's Resource
+                Bundle. The EL tag defaults to JSTL's ResourceBundle if no "bundle"
+                attribute is specified, and to Struts' MessageResources
+                if that's not found. The regular tag defaults to Struts' MessageResources if no
+                bundle is specified. All bad bundle attributes result in a log.error() rather
+                than a JspException.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added dynamic menu example to sample application at
+                <a href="http://demo.raibledesigns.com/struts-menu/dynamicMenu.jsp">
+                http://demo.raibledesigns.com/struts-menu/dynamicMenu.jsp</a>
+                This demonstrates how to build a repository from a database table.  
+                Various enhancements had to be made to the MenuRepository.java class to 
+                make this easier.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added EL-enabled Tags for UseMenuDisplayerTag and DisplayMenuTag.  Simply use
+                the http://struts-menu.sf.net/tag-el in your taglib declaration to use this
+                tag.
+            </action>
+            <action type="fix" dev="mraible" due-to="Matt Raible">
+                Added target and onclick attribute support to TabbedMenuDisplayer.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added documentation for creating custom PermissionsAdapter and
+                configuring VelocityDisplayer.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added net.sf.navigator.menu.MenuLoader so Struts Menu
+                can be configured using Spring.  Also added MenuContextListener
+                so it can be configured as a ContextListener in web.xml.
+            </action>
+        </release>
+        <release version="2.1" date="December 20, 2003" description="2.1 uses JSTL for variables and fixes some other bugs">
+            <action type="update" dev="mraible" due-to="Matt Raible">
+                Changed dynamic variable feature to use JSTL's ExpressionEvaluator.  To substitute
+                request parameters, you must use ${param.paramName}, rather than just ${paramName}.
+            </action>
+            <action type="fix" dev="mraible" due-to="Matt Raible">
+                Fixed UseMenuDisplayerTag to allow config in menu-config.xml to override the
+                default (as documented).
+            </action>
+            <action type="fix" dev="mraible" due-to="Matt Raible">
+                Fixed DisplayMenuTag to continue rendering menu items when Action or Forward lookups fail.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added support for highlighting the last menu selected in the Expandable Menu.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added support for standalone links/menus (no children) to Expandable Menu.
+            </action>
+            <action type="fix" dev="mraible" due-to="Matt Raible">
+                Added struts-menu.tld to the binary distribution.
+            </action>
+        </release>
+        <release version="2.0" date="November 30, 2003" description="2.0 is a refactoring to use Velocity templates">
+            <action type="update" dev="mraible" due-to="Matt Raible">
+                Renamed package structure to net.sf.navigator.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added support for using Struts' actions and forwards for links in menu-config.xml.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Added support for using dynamic variables in menu-config.xml.
+            </action>
+            <action type="add" dev="mraible" due-to="Matt Raible">
+                Updated build process to use Maven for building/deploying.
+            </action>
+            <action type="update" dev="mraible" due-to="Matt Raible">
+                Refactored to use Velocity and allow dynamic variable substitution.
+            </action>
+        </release>
+
+    </body>
+</document>

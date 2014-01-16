@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+
+    <properties>
+        <title>Tasks</title>
+        <author email="mraible AT users.sourceforge.net">Matt Raible</author>
+    </properties>
+
+    <body>
+        <section name="Completed">
+            <p>
+                <ul>
+                    <li>Refactored to use Velocity Templates.</li>
+                    <li>Maven Integration.</li>
+                    <li>Changed package name to net.sf.navigator</li>
+                    <li>Added ability to use variables in menu-config.xml - syntax is 
+                        ${variableName} where variableName is a
+                        variable in page, request, session or application scope.</li>
+                   <li>Use JSTL for variable substitution in URLs.</li>
+                   <li>Added Ability to configure Struts Menu outside of Struts
+                       using Spring or a ServletContextListener.</li>
+                   <li>Create struts-menu-el that allows Expressions for all attributes.</li>
+                   <li>Provide example of building your own MenuRepository - i.e. from a database.</li>
+                </ul>
+            </p>
+        </section>    
+        
+        <section name="Possible Future Enhancements">
+            <p>
+                <ul>
+                    <li>Create a DTD and validate against it (possibly create a 2.0 DTD with lowercase entities.</li>
+                </ul>
+                Are there other enhancements you'd like to see?  If so, please submit a 
+                <a href="http://issues.appfuse.org/browse/SM">Request for Enhancement</a>.
+            </p>
+        </section>    
+
+    </body>
+</document>

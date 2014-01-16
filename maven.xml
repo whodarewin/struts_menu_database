@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="war">
+
+    <!-- create jar file for struts-menu and include it in WEB-INF/lib -->
+    <postGoal name="war:webapp">
+        <attainGoal name="jar"/>
+        <copy file="${maven.build.dir}/${maven.final.name}.jar"
+            todir="${maven.build.dir}/${pom.artifactId}/WEB-INF/lib"/>
+    </postGoal>
+
+    <property environment="env"/>
+    <property name="maven.tomcat.home" value="${env.CATALINA_HOME}"/>
+
+    <!-- deploy the directory created by war:webapp to tomcat/webapps -->
+    <goal name="deploy" prereqs="war:webapp">
+        <copy todir="${maven.tomcat.home}/webapps">
+            <fileset dir="${maven.build.dir}">
+                <include name="${pom.artifactId}/**"/>
+            </fileset>
+        </copy>
+    </goal>
+    
+    <!-- Copy CSS, JavaScript and Templates to site -->
+    <postGoal name="site">
+        <mkdir dir="${maven.build.dir}/docs/styles"/>
+        <copy todir="${maven.build.dir}/docs/styles">
+            <fileset dir="web/styles"/>
+        </copy>
+        <mkdir dir="${maven.build.dir}/docs/templates"/>
+        <copy todir="${maven.build.dir}/docs/templates">
+            <fileset dir="web/templates"/>
+        </copy>
+        <mkdir dir="${maven.build.dir}/docs/scripts"/>
+        <copy todir="${maven.build.dir}/docs/scripts">
+            <fileset dir="web/scripts"/>
+        </copy>
+        <mkdir dir="${maven.build.dir}/docs/menu-images"/>
+        <copy todir="${maven.build.dir}/docs/menu-images">
+            <fileset dir="web/images"/>
+        </copy>
+    </postGoal>
+    
+    <postGoal name="dist:prepare-src-filesystem">
+        <copy todir="${maven.dist.src.archive.dir}/${maven.final.name}/web">
+            <fileset dir="web"/>
+        </copy>
+    </postGoal>
+    
+    <postGoal name="dist:prepare-bin-filesystem">
+        <attainGoal name="war"/>
+        <copy todir="${maven.dist.bin.archive.dir}/${maven.final.name}"
+            file="${maven.build.dir}/${pom.artifactId}.war"/>
+        <copy todir="${maven.dist.bin.archive.dir}/${maven.final.name}">
+            <fileset dir="src/conf/META-INF" includes="*.tld"/>
+        </copy>
+
+        <!-- Include JSTL Jars -->
+        <copy todir="${maven.dist.bin.archive.dir}/${maven.final.name}"
+            file="${maven.build.dir}/${pom.artifactId}/WEB-INF/lib/standard-1.0.6.jar"/>
+        <copy todir="${maven.dist.bin.archive.dir}/${maven.final.name}"
+            file="${maven.build.dir}/${pom.artifactId}/WEB-INF/lib/jstl-1.0.6.jar"/>
+    </postGoal>
+</project>

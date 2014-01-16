@@ -1,0 +1,20 @@
+## The displayMenu macro (at the bottom of this template) is defined in
+## struts-menu.jar!/net/sf/displayer/globalMacros.vm. It has a callback to the #menuItem macro
+## you see below. You can override this macro by creating a menuMacros.vm template
+## at the root of your classpath
+
+#macro( menuItem $menu $level )
+  #set ($title = $displayer.getMessage($menu.title))
+  #if ($stringUtils.indexOf($menu.url, "velocity") > -1 && !$writeNewSeparator)
+    </ul>
+    <h3>New and Cool Examples</h3>
+    <ul class="glassList">
+    #set($writeNewSeparator = "false")
+  #end
+  #if ($menu.url)
+      <li><a href="$!menu.url" title="$title">$title</a>
+      #if ($menu.toolTip)- $!menu.toolTip #end</li>
+  #end
+#end
+
+#displayMenu($menu 0)

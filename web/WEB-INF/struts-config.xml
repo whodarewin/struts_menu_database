@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+
+<struts-config>
+
+
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+
+    <!-- Logon form bean -->
+    <form-bean      name="bogus"
+                    type="org.apache.struts.action.DynaActionForm">
+      <form-property name="foo"  type="java.lang.String"/>
+    </form-bean>
+
+  </form-beans>
+
+
+  <!-- ========== Global Forward Definitions ============================== -->
+  <global-forwards>
+    <forward   name="logon"		path="/logon.jsp"/>
+    <forward   name="tabbedMenu" path="/tabbedMenu.jsp?Home"/>
+  </global-forwards>
+
+
+  <!-- ========== Action Mapping Definitions ============================== -->
+  <action-mappings>
+
+    <action    path="/setPermissions"
+               type="net.sf.navigator.example.SetPermissionsAction"
+              scope="request"
+               name="bogus"
+              input="/permissionsForm.jsp">
+      <forward name="success"   path="/permissionsMenu.jsp" redirect="true"/>
+    </action>
+
+  </action-mappings>
+
+
+  <!-- ========== Message Resources Definitions =========================== -->
+
+  <message-resources  parameter="TrackerRes"/>
+  <message-resources  parameter="ISOCodeRes" key="ISOCodeRes"/>
+
+
+  <!-- ========== Plug Ins Configuration ================================== -->
+
+  <plug-in className="net.sf.navigator.menu.MenuPlugIn">
+    <set-property property="menuConfig" value="/WEB-INF/menu-config.xml"/>
+  </plug-in>
+
+
+</struts-config>
